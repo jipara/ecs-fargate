@@ -1,12 +1,12 @@
 module "security_group" {
-  source      = "./security-group"
+  source      = "./modules/security-group"
   lb_sg_name  = "example-alb-security-group"
   task_sg_name = "example-task-security-group"
   vpc_id      = aws_vpc.default.id
 }
 
 module "autoscaling" {
-  source = "./app-autoscaling"
+  source = "./modules/app-autoscaling"
 
   max_capacity         = 5
   min_capacity         = 1
@@ -35,7 +35,7 @@ module "hello_world_task" {
 }
 
 module "iam-role" {
-  source = "./iam-role"
+  source = "./modules/iam-role"
 
   role_name          = "ECSToECR"
   assume_role_policy = file("rolepolicy.json")
@@ -63,7 +63,7 @@ module "alb" {
 }
 
 module "my_vpc" {
-  source = "./module/vpc"
+  source = "./modules/vpc"
   availability_zone_count = var.availability_zone_count
   vpc_cidr_block = var.vpc_cidr_block
   public_subnet_cidr_block_offset = var.public_subnet_cidr_block_offset
