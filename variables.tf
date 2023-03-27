@@ -171,10 +171,10 @@ variable "task_sg_name" {
   default     = "example-task-security-group"
 }
 
-variable "vpc_id" {
-  description = "ID of the VPC"
-  type        = string
-}
+# variable "vpc_id" {
+#   description = "ID of the VPC"
+#   type        = string
+# }
 
 variable "availability_zone_count" {
   default = 2
