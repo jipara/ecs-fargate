@@ -1,14 +1,14 @@
-variable "lb_name" {
+variable "alb_name" {
   description = "The name of the load balancer"
   type        = string
 }
 
-variable "lb_subnets" {
+variable "alb_subnets" {
   description = "The IDs of the subnets in which to create the load balancer"
   type        = list(string)
 }
 
-variable "lb_security_groups" {
+variable "alb_security_groups" {
   description = "The IDs of the security groups to assign to the load balancer"
   type        = list(string)
 }

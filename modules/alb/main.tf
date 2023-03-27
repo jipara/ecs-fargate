@@ -5,17 +5,17 @@ resource "aws_lb" "default" {
 }
 
 resource "aws_lb_target_group" "hello_world" {
-  name        = "example-target-group"
-  port        = 80
-  protocol    = "HTTP"
-  vpc_id      = aws_vpc.default.id
+  name        = var.target_group_name
+  port        = var.target_group_port
+  protocol    = var.target_group_protocol
+  vpc_id      = var.target_group_vpc_id
   target_type = "ip"
 }
 
 resource "aws_lb_listener" "hello_world" {
   load_balancer_arn = aws_lb.default.id
-  port              = "80"
-  protocol          = "HTTP"
+  port              = var.listener_port
+  protocol          = var.listener_protocol
 
   default_action {
     target_group_arn = aws_lb_target_group.hello_world.id

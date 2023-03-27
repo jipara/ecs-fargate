@@ -1,9 +1,9 @@
-variable "lb_name" {
+variable "alb_name" {
   description = "The name of the load balancer"
   type        = string
 }
 
-variable "lb_subnets" {
+variable "alb_subnets" {
   description = "The IDs of the subnets in which to create the load balancer"
   type        = list(string)
 }
@@ -65,10 +65,10 @@ variable "scalable_dimension" {
   type        = string
 }
 
-variable "service_namespace" {
-  description = "Namespace of the service"
-  type        = string
-}
+# variable "service_namespace" {
+#   description = "Namespace of the service"
+#   type        = string
+# }
 
 variable "policy_name" {
   description = "Name of the scaling policy"

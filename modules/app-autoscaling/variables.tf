@@ -20,10 +20,10 @@ variable "scalable_dimension" {
   type        = string
 }
 
-variable "service_namespace" {
-  description = "Namespace of the service"
-  type        = string
-}
+# variable "service_namespace" {
+#   description = "Namespace of the service"
+#   type        = string
+# }
 
 variable "policy_name" {
   description = "Name of the scaling policy"

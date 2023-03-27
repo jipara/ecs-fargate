@@ -2,7 +2,7 @@ module "security_group" {
   source      = "./modules/security-group"
   lb_sg_name  = "example-alb-security-group"
   task_sg_name = "example-task-security-group"
-  vpc_id      = aws_vpc.default.id
+  vpc_id      = my_vpc.vpc_id
 }
 
 module "autoscaling" {
@@ -22,13 +22,15 @@ module "hello_world_task" {
   source = "./modules/ecs"
 
   ecs_task_family      = "hello-world-app"
+  ecs_service = "hello-world-service"
+  ecs_cluster          = "example-cluster"
   ecs_network_mode     = "awsvpc"
   ecs_compatibilities  = ["FARGATE"]
   ecs_task_cpu         = 1024
   ecs_task_memory      = 2048
   ecs_task_role_arn    = aws_iam_role.ECSToECR.arn
   ecs_execution_role_arn = aws_iam_role.ECSToECR.arn
-  container_image      = "844024018158.dkr.ecr.us-east-1.amazonaws.com/demo-repo:latest"
+  container_image      = "161911848143.dkr.ecr.us-east-1.amazonaws.com/demo-python"
   container_cpu        = 1024
   container_memory     = 2048
   container_port       = 8081
@@ -38,7 +40,7 @@ module "iam-role" {
   source = "./modules/iam-role"
 
   role_name          = "ECSToECR"
-  assume_role_policy = file("rolepolicy.json")
+  assume_role_policy = file("./policies/rolepolicy.json")
   policy_arns = [
     "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy",
     "arn:aws:iam::aws:policy/AmazonElasticContainerRegistryPublicFullAccess",
