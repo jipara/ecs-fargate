@@ -159,22 +159,22 @@
 #   type        = set(string)
 #   description = "A set of ARNs of IAM policies to attach to the role"
 # }
-# variable "lb_sg_name" {
-#   description = "Name of the ALB security group"
-#   type        = string
-#   default     = "example-alb-security-group"
-# }
+variable "lb_sg_name" {
+  description = "Name of the ALB security group"
+  type        = string
+  default     = "example-alb-security-group"
+}
 
-# variable "task_sg_name" {
-#   description = "Name of the task security group"
-#   type        = string
-#   default     = "example-task-security-group"
-# }
+variable "task_sg_name" {
+  description = "Name of the task security group"
+  type        = string
+  default     = "example-task-security-group"
+}
 
-# variable "vpc_id" {
-#   description = "ID of the VPC"
-#   type        = string
-# }
+variable "vpc_id" {
+  description = "ID of the VPC"
+  type        = string
+}
 
 variable "availability_zone_count" {
   default = 2

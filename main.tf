@@ -2,7 +2,7 @@ module "security_group" {
   source      = "./modules/security-group"
   lb_sg_name  = "example-alb-security-group"
   task_sg_name = "example-task-security-group"
-  vpc_id      = my_vpc.vpc_id
+  vpc_id      = module.my_vpc.vpc_id
 }
 
 # module "autoscaling" {
