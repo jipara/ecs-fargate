@@ -13,3 +13,8 @@ variable "public_subnet_cidr_block_offset" {
 variable "private_subnet_cidr_block_offset" {
   default = 0
 }
+
+variable "state" {
+  description = "The state of the availability zones to filter on (available, unavailable, etc.)"
+  default     = "available"
+}

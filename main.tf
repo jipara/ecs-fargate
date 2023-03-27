@@ -71,3 +71,7 @@ module "my_vpc" {
   public_subnet_cidr_block_offset = var.public_subnet_cidr_block_offset
   private_subnet_cidr_block_offset = var.private_subnet_cidr_block_offset
 }
+
+data "aws_availability_zones" "available_zones" {
+  state = "available"
+}
