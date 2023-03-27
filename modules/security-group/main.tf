@@ -1,6 +1,6 @@
 resource "aws_security_group" "lb" {
   name        = var.lb_sg_name
-  vpc_id      = var.vpc_id
+  vpc_id      = module.my_vpc.vpc_id
 
   ingress {
     protocol    = "tcp"
