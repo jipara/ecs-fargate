@@ -22,3 +22,4 @@ resource "aws_lb_listener" "hello_world" {
     type             = "forward"
   }
 }
+
