@@ -29,6 +29,7 @@ module "autoscaling" {
   policy_name          = "dev-to-cpu"
   target_metric_type   = "ECSServiceAverageCPUUtilization"
   target_value         = 0.02
+  depends_on           = [module.hello_world_task]
 }
 
 module "hello_world_task" {
@@ -50,6 +51,7 @@ module "hello_world_task" {
   aws_subnet_private_id = module.my_vpc.aws_subnet_private_id
   task_sg_id      = module.security_group.task_sg_id
   aws_lb_target_group_id     = module.alb.aws_lb_target_group_id
+  depends_on = [module.alb] 
 }
 
 # module "iam-role" {
