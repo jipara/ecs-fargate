@@ -21,7 +21,6 @@ resource "aws_subnet" "private" {
   vpc_id            = aws_vpc.default.id
 }
 
-
 resource "aws_internet_gateway" "gateway" {
   vpc_id = aws_vpc.default.id
 }
@@ -51,4 +50,19 @@ resource "aws_route_table_association" "private" {
   count          = var.availability_zone_count
   subnet_id      = element(aws_subnet.private.*.id, count.index)
   route_table_id = element(aws_route_table.private.*.id, count.index)
+}
+
+resource "aws_route_table" "public" {
+  count  = var.availability_zone_count
+  vpc_id = aws_vpc.default.id
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = element(aws_internet_gateway.gateway.*.id, count.index)
+  }
+}
+
+resource "aws_route_table_association" "public" {
+  count          = var.availability_zone_count
+  subnet_id      = element(aws_subnet.public.*.id, count.index)
+  route_table_id = element(aws_route_table.public.*.id, count.index)
 }
