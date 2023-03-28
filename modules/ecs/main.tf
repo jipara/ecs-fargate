@@ -5,17 +5,17 @@ resource "aws_ecs_cluster" "main" {
 resource "aws_ecs_service" "hello_world" {
   name            = var.ecs_service
   cluster         = aws_ecs_cluster.main.id
-  task_definition = module.hello_world_task.task_definition_arn
-  #desired_count   = var.app_count
+  task_definition = aws_ecs_task_definition.hello_world.arn
+  desired_count   = var.app_count
   launch_type     = "FARGATE"
 
   network_configuration {
-    security_groups = [aws_security_group.hello_world_task.id]
-    subnets         = aws_subnet.private.*.id
+    security_groups = [var.task_sg_id]
+    subnets         = var.aws_subnet_private_id
   }
 
   load_balancer {
-    target_group_arn = aws_lb_target_group.hello_world.id
+    target_group_arn = var.aws_lb_target_group_id
     container_name   = "hello-world-app"
     container_port   = 8081
   }
@@ -28,7 +28,7 @@ resource "aws_ecs_service" "hello_world" {
     ]
   } */
 
-  depends_on = [aws_lb_listener.hello_world]
+  #depends_on = [aws_lb_listener.hello_world]
 }
 
 resource "aws_ecs_task_definition" "hello_world" {
