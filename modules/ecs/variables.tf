@@ -54,3 +54,18 @@ variable "container_memory" {
 variable "container_port" {
   description = "The port number on the container that is bound to the user-specified or automatically assigned host port"
 }
+
+variable "aws_subnet_private_id" {
+  description = "The name of the target group"
+  type        = list(string)
+}
+
+variable "task_sg_id" {
+  description = "The name of the sg group"
+  type        = string
+}
+
+variable "aws_lb_target_group_id" {
+  description = "The name of the sg group"
+  type        = string
+}
